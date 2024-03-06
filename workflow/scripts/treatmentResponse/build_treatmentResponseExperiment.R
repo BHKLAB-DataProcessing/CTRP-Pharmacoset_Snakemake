@@ -180,7 +180,6 @@ tre_fit <- tre_qc |> CoreGx::endoaggregate(
             ic50_recomputed=ic50
         )
     },
-    subset= treatmentid == "16-beta-bromoandrosterone",
     assay="sensitivity",
     target="profiles_recomputed",
     enlist=FALSE,  # this option enables the use of a code block for aggregation

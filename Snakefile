@@ -44,6 +44,6 @@ rule build_treatmentResponseExperiment:
     log:
         logs / "{release}" / "build_treatmentResponseExperiment.log"
     threads: 
-        1
+        30
     script:
         scripts / "treatmentResponse" / "build_treatmentResponseExperiment.R"
