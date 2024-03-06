@@ -20,7 +20,11 @@ rule all:
         expand(
             procdata / "treatmentResponse" / "CTRPv{release}_treatmentResponseExperiment.RDS",
                 release=["2.0"]
-        )
+        ),
+        expand(
+            procdata / metadata / "CTRPv{release}_treatmentMetadata.RDS"
+                release=["2.0"]
+        ),
 
 rule download_treatmentResponse:
     input:
@@ -47,3 +51,12 @@ rule build_treatmentResponseExperiment:
         30
     script:
         scripts / "treatmentResponse" / "build_treatmentResponseExperiment.R"
+
+rule annotate_treatmentMetadata:
+    input:
+        tr = rawdata / "treatmentResponse" / "CTRPv{release}.zip",
+    output:
+        treatmentMetadata = procdata / metadata / "CTRPv{release}_treatmentMetadata.RDS"
+    script:
+        scripts / metadata / "preprocess_treatmentMetadata.R"
+
