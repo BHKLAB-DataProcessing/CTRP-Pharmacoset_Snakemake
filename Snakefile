@@ -22,7 +22,7 @@ rule all:
                 release=["2.0"]
         ),
         expand(
-            procdata / metadata / "CTRPv{release}_treatmentMetadata.RDS"
+            procdata / metadata / "CTRPv{release}_treatmentMetadata.RDS",
                 release=["2.0"]
         ),
 
