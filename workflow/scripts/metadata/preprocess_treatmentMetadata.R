@@ -5,20 +5,38 @@ if(exists("snakemake")){
     OUTPUT <- snakemake@output
     WILDCARDS <- snakemake@wildcards
     THREADS <- snakemake@threads
-    RESOURCES <- snakemake@resources    
+
     # setup logger if log file is provided
     if(length(snakemake@log)>0) 
-        sink(snakemake@log[[1]], FALSE, c("output", "message"), TRUE)
+        sink(
+            file = snakemake@log[[1]], 
+            append = FALSE, 
+            type = c("output", "message"), 
+            split = TRUE
+    )
 
-    save.image(paste0(snakemake@rule, ".RData"))
+    file.path("resources", paste0(snakemake@rule, ".RData")) |> 
+        save.image()
+}else{
+    file.path("resources", "preprocess_treatmentMetadata.RData") |>
+        load()
 }
 
+#############################################################################
+# Load INPUT
+#############################################################################
 
 zipDir <- file.path(RESOURCES$tmpdir, snakemake@rule, tools::file_path_sans_ext(INPUT$tr))
 dir.create(zipDir, recursive = TRUE, showWarnings = FALSE)
 print(paste0("Unzipping ", INPUT$tr, " into ", zipDir))
 unzip(INPUT$tr, exdir = zipDir)
 files <- paste0(zipDir, "/", list.files(zipDir))
+
+
+#############################################################################
+# Main Script
+
+
 
 # Get the treatment metadata
 # --------------------------
@@ -51,10 +69,10 @@ treatment_annotations <- merge(
 
 
 
-annotations <- c('ChEMBL ID', 'NSC Number', 'Drug Induced Liver Injury', 'CAS', 'ATC Code')
+# annotations <- c('ChEMBL ID', 'NSC Number', 'Drug Induced Liver Injury', 'CAS', 'ATC Code')
 
-message("Annotating with ChEMBL ID")
-treatment_annotations[, 'pubchem.ChEMBL.ID' := lapply(cids, function(x) AnnotationGx::annotatePubchemCompound(cid = x, heading = 'ChEMBL ID')), by = cids]
+# message("Annotating with ChEMBL ID")
+# treatment_annotations[, 'pubchem.ChEMBL.ID' := lapply(cids, function(x) AnnotationGx::annotatePubchemCompound(cid = x, heading = 'ChEMBL ID')), by = cids]
 
 # message("Annotating with ChEMBL ID")
 # pubchem_annotated[, 'pubchem.ChEMBL.ID' := lapply(pubchem.CID, function(x) pseudo_annotate(x, 'ChEMBL ID')), by = pubchem.CID]
@@ -74,4 +92,18 @@ treatment_annotations[, 'pubchem.ChEMBL.ID' := lapply(cids, function(x) Annotati
 # message("Annotating with Synonyms")
 # annotated_treatments <- merge(treatmentMetadata, pubchem_annotated, by.x = "GDSC.treatmentid", by.y = "GDSC.treatmentid", all.x = TRUE)
 
-saveRDS(treatment_annotations, file = OUTPUT$treatmentMetadata)
+
+
+
+## ----------------------------------------------------- ##
+
+
+
+
+## --------------------- Save OUTPUT ------------------- ##
+
+data.table::fwrite(
+    treatment_annotations, 
+    OUTPUT$treatmentMetadata,
+    sep = "\t",
+    quote = FALSE)

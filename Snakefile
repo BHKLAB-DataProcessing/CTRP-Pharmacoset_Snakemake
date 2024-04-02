@@ -34,7 +34,6 @@ rule download_treatmentResponse:
     output:
         tr = rawdata / "treatmentResponse" / "CTRPv{release}.zip" 
     shell:
-        # echo $(basename {input[0]} .zip)
         """
         mv {input[0]} {output.tr}
         """
@@ -56,7 +55,7 @@ rule annotate_treatmentMetadata:
     input:
         tr = rawdata / "treatmentResponse" / "CTRPv{release}.zip",
     output:
-        treatmentMetadata = procdata / metadata / "CTRPv{release}_treatmentMetadata.RDS"
+        treatmentMetadata = procdata / metadata / "CTRPv{release}_treatmentMetadata.tsv"
     script:
         scripts / metadata / "preprocess_treatmentMetadata.R"
 
