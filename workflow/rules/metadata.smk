@@ -1,3 +1,8 @@
+from pathlib import Path
+
+metadata = Path(config["directories"]["metadata"])
+
+annotationGx_Docker = config["containers"]["annotationGx"]
 
 rule preprocess_Metadata:
     input:
@@ -7,8 +12,9 @@ rule preprocess_Metadata:
         rawTreatmentMetadata=rawdata / metadata / "CTRPv{release}_treatmentMetadata.tsv",
     log:
         logs / "CTRPv{release}_preprocess_Metadata.log",
+
     script:
-        ".." / scripts / metadata / "preprocess_Metadata.R"
+        "../scripts" / metadata / "preprocess_Metadata.R"
 
 
 rule annotate_treatmentMetadata:
@@ -16,8 +22,12 @@ rule annotate_treatmentMetadata:
         rawTreatmentMetadata=rawdata / metadata / "CTRPv{release}_treatmentMetadata.tsv",
     output:
         treatmentMetadata=procdata / metadata / "CTRPv{release}_treatmentMetadata.tsv",
+    log:
+        logs / "CTRPv{release}_annotate_treatmentMetadata.log",
+    container:
+        annotationGx_Docker,
     script:
-        ".." / scripts / metadata / "annotate_treatmentMetadata.R"
+       "../scripts" /  metadata / "annotate_treatmentMetadata.R"
 
 
 rule annotate_sampleMetadata:
@@ -25,5 +35,9 @@ rule annotate_sampleMetadata:
         rawSampleMetadata=rawdata / metadata / "CTRPv{release}_sampleMetadata.tsv",
     output:
         sampleMetadata=procdata / metadata / "CTRPv{release}_sampleMetadata.tsv",
+    log:
+        logs / "CTRPv{release}_annotate_sampleMetadata.log",
+    container:
+        annotationGx_Docker,
     script:
-        ".." / scripts / metadata / "annotate_sampleMetadata.R"
+        "../scripts"/ metadata / "annotate_sampleMetadata.R"

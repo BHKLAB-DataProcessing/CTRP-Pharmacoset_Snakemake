@@ -23,4 +23,4 @@ rule build_treatmentResponseExperiment:
         logs / "{release}" / "build_treatmentResponseExperiment.log",
     threads: 30
     script:
-        ".." / scripts / trDir / "build_treatmentResponseExperiment.R"
+        "../scripts" / trDir / "build_treatmentResponseExperiment.R"
