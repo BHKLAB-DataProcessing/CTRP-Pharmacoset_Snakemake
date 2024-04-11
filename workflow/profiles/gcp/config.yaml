@@ -1,0 +1,13 @@
+show-failed-logs: True
+keep-going: True
+keep-incomplete: True
+rerun-incomplete: True
+printshellcmds: False
+
+# default-remote-prefix: "orcestradata/CTRP-Pharmacoset_Snakemake"
+default-storage-provider: "gcs"
+default-storage-prefix: "gs://orcestradata/CTRP-Pharmacoset_Snakemake"
+# storage-gcs-keep-local: True
+
+# When running on Kubernetes
+jobs: 256

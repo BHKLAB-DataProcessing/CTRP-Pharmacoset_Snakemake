@@ -18,16 +18,16 @@ treatmentResponse:
     description: "The raw treatment response data for CTRP is available from \
       https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
     url: "https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/CTRPv2.0_2015_ctd2_ExpandedDataset.zip"
-  "2.1":
-    description: "The raw treatment response data for CTRP is available from \
-      https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
-    url: "https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.1_2016_pub_NatChemBiol_12_109/CTRPv2.1_2016_pub_NatChemBiol_12_109.zip"
-  "2.2":
-    description: "The raw treatment response data for CTRP is available from \
-      https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
-    url: "https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.2_2015_pub_CancerDisc_5_1210/CTRPv2.2_2015_pub_CancerDisc_5_1210.zip"
-  "3.0":
-    description: "The raw treatment response data for CTRP is available from \
-      https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
-    url: "https://ctd2-data.nci.nih.gov/Public/Broad/Broad_2018_CTRPv3/Broad_2018_CTRPv3.zip"
+  # "2.1":
+  #   description: "The raw treatment response data for CTRP is available from \
+  #     https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
+  #   url: "https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.1_2016_pub_NatChemBiol_12_109/CTRPv2.1_2016_pub_NatChemBiol_12_109.zip"
+  # "2.2":
+  #   description: "The raw treatment response data for CTRP is available from \
+  #     https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
+  #   url: "https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.2_2015_pub_CancerDisc_5_1210/CTRPv2.2_2015_pub_CancerDisc_5_1210.zip"
+  # "3.0":
+  #   description: "The raw treatment response data for CTRP is available from \
+  #     https://ctd2-data.nci.nih.gov/Public/Broad/CTRPv2.0_2015_ctd2_ExpandedDataset/"
+  #   url: "https://ctd2-data.nci.nih.gov/Public/Broad/Broad_2018_CTRPv3/Broad_2018_CTRPv3.zip"
 

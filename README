@@ -1,0 +1,69 @@
+# A pipeline for processing the CTRP data
+
+## This pipeline uses the `pixi` package manager
+
+Clone this repository and then run:
+
+```bash
+pixi install
+```
+
+This makes sure that the lock is synchronized and version controlled. 
+
+## Usage
+
+To add packages to the `default` environment:
+
+```bash
+pixi add pandas
+```
+
+### To run a command in the environment
+
+```bash
+pixi run snakemake --dryrun
+```
+
+### Enter into the environment
+
+```bash
+pixi shell
+
+# Exit the environment using "exit"
+```
+
+### Pixi Tasks
+Pixi also allows defining tasks for common tasks. This is done in the [pyproject.toml](pyproject.toml) file.
+
+```toml
+[tool.pixi.tasks]
+dryrun = "snakemake --dry-run"
+snake = "snakemake --cores 1"
+```
+
+This allows me to run `pixi run dryrun` to see what snakemake would do and `pixi run snake` to run snakemake.
+
+A common task I like to do is creating the dags regularly and including them in my README.
+This can then be automated with the task.
+
+```toml
+dag = "snakemake -F --dag | dot -Tsvg > resources/dag.svg"
+rulegraph = "snakemake -F --rulegraph | dot -Tsvg > resources/rulegraph.svg"
+filegraph = "snakemake -F --filegraph | dot -Tsvg > resources/filegraph.svg"
+graphs = { depends_on = ["dag", "rulegraph", "filegraph"] }
+```
+
+Running `pixi run graphs` will create the three graphs and save them in the resources folder.
+This way, they are automatically updated below in this README. 
+
+#### DAG 
+
+![DAG](resources/dag.svg)
+
+#### Rulegraph
+
+![Rulegraph](resources/rulegraph.svg)
+
+#### Filegraph
+
+![Filegraph](resources/filegraph.svg)

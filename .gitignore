@@ -12,3 +12,8 @@ cog.sanger.ac.uk/
 orcestradata/
 rdata_files
 TRASH
+resources/*.RData
+
+# pixi environments
+.pixi
+
