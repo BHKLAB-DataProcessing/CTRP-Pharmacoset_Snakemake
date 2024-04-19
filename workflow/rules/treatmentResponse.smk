@@ -25,5 +25,7 @@ rule build_treatmentResponseExperiment:
         "../envs/PharmacoSet.yaml"
     threads: 
         30
+    resources:
+        mem_mb = 50000
     script:
         "../scripts" / trDir / "build_treatmentResponseExperiment.R"

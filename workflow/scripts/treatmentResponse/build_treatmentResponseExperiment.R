@@ -149,8 +149,10 @@ CoreGx::assayMap(treDataMapper) <- list(
     )
 )
 
+print("Running CoreGx::metaConstruct")
 (tre <- metaConstruct(treDataMapper))
 
+print("Endoaggregating to create mono_viability Assay")
 tre_qc <- tre |>
     endoaggregate(
         assay="sensitivity",
@@ -160,7 +162,7 @@ tre_qc <- tre |>
         nthread=THREADS
 )
 
-
+print("Endoaggregating to create profiles_recomputed Assay")
 tre_fit <- tre_qc |> CoreGx::endoaggregate(
     {  # the entire code block is evaluated for each group in our group by
         # 1. fit a log logistic curve over the dose range
@@ -181,7 +183,7 @@ tre_fit <- tre_qc |> CoreGx::endoaggregate(
         )
     },
     assay="sensitivity",
-    target="profiles_recomputed",
+    target="profiles",
     enlist=FALSE,  # this option enables the use of a code block for aggregation
     by=c("treatmentid", "sampleid"),
     nthread=THREADS  # parallelize over multiple cores to speed up the computation
