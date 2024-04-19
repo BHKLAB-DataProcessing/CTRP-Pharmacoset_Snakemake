@@ -21,6 +21,9 @@ rule build_treatmentResponseExperiment:
         sensInfo=procdata / trDir / "CTRPv{release}_sensitivityInfo.RDS",
     log:
         logs / "{release}" / "build_treatmentResponseExperiment.log",
-    threads: 30
+    conda:
+        "workflow/envs/PharmacoSet.yaml"
+    threads: 
+        30
     script:
         "../scripts" / trDir / "build_treatmentResponseExperiment.R"

@@ -3,10 +3,13 @@ keep-going: True
 keep-incomplete: True
 rerun-incomplete: True
 printshellcmds: False
+use-conda: True
+use-singularity: True
 
-# default-remote-prefix: "orcestradata/CTRP-Pharmacoset_Snakemake"
-default-storage-provider: "gcs"
-default-storage-prefix: "gs://orcestradata/CTRP-Pharmacoset_Snakemake"
+default-remote-provider: "GS"
+default-remote-prefix: "orcestradata/CTRP-Pharmacoset_Snakemake"
+# default-storage-provider: "gcs"
+# default-storage-prefix: "gs://orcestradata/CTRP-Pharmacoset_Snakemake"
 # storage-gcs-keep-local: True
 
 # When running on Kubernetes

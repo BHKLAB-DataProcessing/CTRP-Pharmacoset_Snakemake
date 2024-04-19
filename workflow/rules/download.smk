@@ -1,12 +1,11 @@
+from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
+HTTP = HTTPRemoteProvider()
 
 treatmentResponse = config["treatmentResponse"]
 
-storage:
-    provider = "http"
-
 rule download_treatmentResponse_AND_metadata:
     input:
-        lambda wc: storage.http(
+        lambda wc: HTTP.remote(
             treatmentResponse[wc.release]["url"],
         )
     output:

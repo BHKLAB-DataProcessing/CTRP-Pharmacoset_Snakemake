@@ -12,7 +12,8 @@ rule preprocess_Metadata:
         rawTreatmentMetadata=rawdata / metadata / "CTRPv{release}_treatmentMetadata.tsv",
     log:
         logs / "CTRPv{release}_preprocess_Metadata.log",
-
+    container:
+        annotationGx_Docker,
     script:
         "../scripts" / metadata / "preprocess_Metadata.R"
 
@@ -26,6 +27,8 @@ rule annotate_treatmentMetadata:
         logs / "CTRPv{release}_annotate_treatmentMetadata.log",
     container:
         annotationGx_Docker,
+    threads:
+        4
     script:
        "../scripts" /  metadata / "annotate_treatmentMetadata.R"
 
@@ -39,5 +42,7 @@ rule annotate_sampleMetadata:
         logs / "CTRPv{release}_annotate_sampleMetadata.log",
     container:
         annotationGx_Docker,
+    threads:
+        4
     script:
         "../scripts"/ metadata / "annotate_sampleMetadata.R"
