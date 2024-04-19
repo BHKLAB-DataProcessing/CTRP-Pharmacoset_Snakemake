@@ -22,7 +22,7 @@ rule build_treatmentResponseExperiment:
     log:
         logs / "{release}" / "build_treatmentResponseExperiment.log",
     conda:
-        "workflow/envs/PharmacoSet.yaml"
+        "../envs/PharmacoSet.yaml"
     threads: 
         30
     script:
